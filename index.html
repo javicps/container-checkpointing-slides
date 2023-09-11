@@ -56,24 +56,40 @@
 				<section data-background="#746AB0">
 					<h2>It all started with CRIU</p></h2>
 					<img src="images/criu.svg" style="float:right; max-width:30%"></img>
-					<p>Initial POC on 2011, started as Virtuozzo project</p>
-					<p>1.0 in Nov. 2013 (Linux 3.11)</p>
-					<p>Checkpoint/Restore In Userspace</p>
-					<p>Multiple use cases: container migration, live kernel patching, apps snapshot/zero downtime crash restore, ... </p>
+					<ul>
+						<li class="fragment">Initial POC on 2011</li>
+						<li class="fragment">Started as Virtuozzo project</li>
+						<li class="fragment">1.0 in Nov. 2013 (Linux 3.11)</li>
+						<li class="fragment">Checkpoint/Restore In Userspace</li>
+						<li class="fragment">Multiple use cases</li>
+					</ul>
+					<aside class="notes">
+						Initial POC on 2011, started as Virtuozzo project
+						1.0 in Nov. 2013 (Linux 3.11)
+						Checkpoint/Restore In Userspace
+						Multiple use cases: container migration, live kernel patching, apps snapshot/zero downtime crash restore, ...
+					</aside>
 				</section>
 				<section data-transition="slide" data-background="#00008b" data-background-transition="zoom">
 					<h2>Live Demo: checkpointing a container</h2>
 				</section>
-				<section data-background="#746AB0">
+				<section data-background="#746AB0" >
 					<h2>What exactly is a container checkpoint?</h2>
 					<p class="fragment">A tar file, containing:</p>
 					<ul>
-						<li class="fragment">An archive of all changed files on the container filesystem (rootfs-diffs.tar)</li>
-						<li class="fragment">Checkpoint images of processes, memory, file descriptors, etc.</li>
-						<li class="fragment">Metadata about the container</li>
+						<li class="fragment">Archive of all changed files (rootfs-diffs.tar)</li>
+						<li class="fragment">Images (of processes, memory, file descriptors...)</li>
+						<li class="fragment">Metadata</li>
 						<li class="fragment">Bind mounts info</li>
-						<li class="fragment">Checkpoint stats&logs</li>
+						<li class="fragment">Stats&logs</li>
 					</ul>
+					<aside class="notes">
+						- An archive of all changed files on the container filesystem (rootfs-diffs.tar)
+						- Checkpoint images of processes, memory, file descriptors, etc.
+						- Metadata about the container
+						- Bind mounts info
+						- Stats&Logs📝
+					  </aside>
 				</section>
 				<section data-transition="slide" data-background="#00008b" data-background-transition="zoom">
 					<h2>Live Demo: checkpointctl</h2>

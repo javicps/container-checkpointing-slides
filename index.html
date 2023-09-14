@@ -1,152 +1,174 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Digital forensics with Container Checkpointing</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/league.css">
+	<title>Digital forensics with Container Checkpointing</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>
-					<img src="images/Blog_Images-ContainerCheckpoint-featured-v2.png" alt="Digital forensics with container checkpointing logo" style="height: 180px; margin: 0 auto 4rem auto; background: transparent;" class="demo-logo">
-					<h2>Digital forensics with <p>container checkpointing</p></h2>
-					<p>
-						<small><a href="">Daniel Simionato</a> and <a href="">Javier Martínez</a></small>
-					</p>
-				</section>
-				<section>
-					<h3>About us</p></h3>
-					<p>
-						<small><a href="">Daniel Simionato</a> and <a href="">Javier Martínez</a></small>
-						<div class="r-hstack justify-center">
-							<img src="images/profile_daniel.jpeg" style="width: 200px; margin:10px"></img>
-							<img src="images/profile_javi.jpeg" style="width: 200px;"></img>
-						</div>
-					</p>
-				</section>
-				<section>
-					<h2>What is Digital Forensics?</p></h2>
-					<p class="fragment">It's the process of...</p>
-					<ul>
-						<li class="fragment">retrieving</li>
-						<li class="fragment">analizing</li>
-						<li class="fragment">preserving</li>
-					</ul>
-					<p class="fragment"><strong>electronic data</strong> as evidence of a criminal activity</p>
-				</section>
-				<section>
-					<h2>Two important moments:</p></h2>
-					<ul>
-						<li class="fragment">When incident happens</li>
-						<li class="fragment">When investigation starts</li>
-					</ul>
-				</section>
-				<section data-background="#746AB0">
-					<h2>Container Checkpointing technical deep dive</p></h2>
-				</section>
-				<section data-background="#746AB0">
-					<h2>It all started with CRIU</p></h2>
-					<img src="images/criu.svg" style="float:right; max-width:30%"></img>
-					<ul>
-						<li class="fragment">Initial POC on 2011</li>
-						<li class="fragment">Started as Virtuozzo project</li>
-						<li class="fragment">1.0 in Nov. 2013 (Linux 3.11)</li>
-						<li class="fragment">Checkpoint/Restore In Userspace</li>
-						<li class="fragment">Multiple use cases</li>
-					</ul>
-					<aside class="notes">
-						Initial POC on 2011, started as Virtuozzo project
-						1.0 in Nov. 2013 (Linux 3.11)
-						Checkpoint/Restore In Userspace
-						Multiple use cases: container migration, live kernel patching, apps snapshot/zero downtime crash restore, ...
-					</aside>
-				</section>
-				<section data-transition="slide" data-background="#00008b" data-background-transition="zoom">
-					<h2>Live Demo: checkpointing a container</h2>
-				</section>
-				<section data-background="#746AB0" >
-					<h2>What exactly is a container checkpoint?</h2>
-					<p class="fragment">A tar file, containing:</p>
-					<ul>
-						<li class="fragment">Archive of all changed files (rootfs-diffs.tar)</li>
-						<li class="fragment">Images (of processes, memory, file descriptors...)</li>
-						<li class="fragment">Metadata</li>
-						<li class="fragment">Bind mounts info</li>
-						<li class="fragment">Stats&logs</li>
-					</ul>
-					<aside class="notes">
-						- An archive of all changed files on the container filesystem (rootfs-diffs.tar)
-						- Checkpoint images of processes, memory, file descriptors, etc.
-						- Metadata about the container
-						- Bind mounts info
-						- Stats&Logs📝
-					  </aside>
-				</section>
-				<section data-transition="slide" data-background="#00008b" data-background-transition="zoom">
-					<h2>Live Demo: checkpointctl</h2>
-					<!-- quick demo just showing stats -->
-				</section>
-				<section data-transition="slide" data-background="#00008b" data-background-transition="zoom">
-					<h2>CRIU limitations</h2>
-					<p>Not everything can be checkpointed:</p>
-					<ul>
-						<li class="fragment">Devices</li>
-						<li class="fragment">Open files from unmounted fs</li>
-						<li class="fragment">Traced processes</li>
-					</ul>
-				</section>
-				<section data-transition="slide" data-background="#00008b" data-background-transition="zoom">
-					<h2>Checkpointing in Kubernetes</h2>
-					<p>Graduated to alpha in Kubernetes v1.25 (#2008)</p>
-					<img src="images/graduated_alpha.png" style="max-width:50%"></img>
-					<p>Currently only checkpointing, exposed at Kubelet level</p>
-				</section>
-				<section data-transition="slide" data-background="#00008b" data-background-transition="zoom">
-					<h2>Checkpointing in Kubernetes: requirements</h2>
-					<ul>
-						<li class="fragment">Container runtime: CRI-O</li>
-						<li class="fragment">Enable feature gate: ContainerCheckpoint</li>
-					</ul>
-				</section>
-				<section data-transition="slide" data-background="#00008b" data-background-transition="zoom">
-					<h2>Live Demo: Kubernetes checkpointing</h2>
-				</section>
-				<section data-transition="slide" data-background="#00008b" data-background-transition="zoom">
-					<h2>Checkpointing in Kubernetes: restoring a checkpoint</h2>
-					<ul>
-						<li class="fragment">Outside of k8s</li>
-						<li class="fragment">Inside of k8s: necessary to build an image from the checkpoint</li>
-					</ul>
-				</section>
-				<section data-transition="slide" data-background="#00008b" data-background-transition="zoom">
-					<h2>Live Demo: Analyzing a checkpoint with crit</h2>
-				</section>
-			</div>
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/league.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<img src="images/Blog_Images-ContainerCheckpoint-featured-v2.png"
+					alt="Digital forensics with container checkpointing logo"
+					style="height: 180px; margin: 0 auto 4rem auto; background: transparent;" class="demo-logo">
+				<h2>Digital forensics with <p>container checkpointing</p>
+				</h2>
+				<p>
+					<small><a href="">Daniel Simionato</a> and <a href="">Javier Martínez</a></small>
+				</p>
+			</section>
+			<section>
+				<h3>About us</p>
+				</h3>
+				<p>
+					<small><a href="">Daniel Simionato</a> and <a href="">Javier Martínez</a></small>
+				<div class="r-hstack justify-center">
+					<img src="images/profile_daniel.jpeg" style="width: 200px; margin:10px"></img>
+					<img src="images/profile_javi.jpeg" style="width: 200px;"></img>
+				</div>
+				</p>
+			</section>
+			<section data-background="#399ba3">
+				<h2>What is Digital Forensics?</p>
+				</h2>
+				<p class="fragment">It's the process of...</p>
+				<ul>
+					<li class="fragment">retrieving</li>
+					<li class="fragment">analizing</li>
+					<li class="fragment">preserving</li>
+				</ul>
+				<p class="fragment"><strong>electronic data</strong> as evidence of a criminal activity</p>
+			</section>
+			<section data-background="#399ba3">
+				<h2>Two important moments:</p>
+				</h2>
+				<ul>
+					<li class="fragment">When incident happens</li>
+					<li class="fragment">When investigation starts</li>
+				</ul>
+			</section>
+			<section data-background="#746AB0">
+				<h2>Container Checkpointing</p>
+				</h2>
+				<p class="fragment">Save the current container state</p>
+				<p class="fragment">Snapshot</p>
+				<p class="fragment">Backup</p>
+			</section>
+			<section data-background="#746AB0">
+				<h2>A note about state</p>
+				</h2>
+				<p class="fragment">Save the current container state</p>
+			</section>
+			<section data-background="#746AB0">
+				<h2>It all started with CRIU</p>
+				</h2>
+				<img src="images/criu.svg" style="float:right; max-width:30%"></img>
+				<ul>
+					<li class="fragment">Initial POC on 2011</li>
+					<li class="fragment">Started as Virtuozzo project</li>
+					<li class="fragment">1.0 in Nov. 2013 (Linux 3.11)</li>
+					<li class="fragment">Checkpoint/Restore In Userspace</li>
+					<li class="fragment">Multiple use cases</li>
+				</ul>
+				<aside class="notes">
+					Initial POC on 2011, started as Virtuozzo project
+					1.0 in Nov. 2013 (Linux 3.11)
+					Checkpoint/Restore In Userspace
+					Multiple use cases: container migration, live kernel patching, apps snapshot/zero downtime crash
+					restore, ...
+				</aside>
+			</section>
+			<section data-background="#746AB0">
+				<h2>What exactly is a container checkpoint?</h2>
+				<p class="fragment">A tar file, containing:</p>
+				<ul>
+					<li class="fragment">Archive of all changed files (rootfs-diffs.tar)</li>
+					<li class="fragment">Images (of processes, memory, file descriptors...)</li>
+					<li class="fragment">Metadata</li>
+					<li class="fragment">Bind mounts info</li>
+					<li class="fragment">Stats&logs</li>
+				</ul>
+				<aside class="notes">
+					- An archive of all changed files on the container filesystem (rootfs-diffs.tar)
+					- Checkpoint images of processes, memory, file descriptors, etc.
+					- Metadata about the container
+					- Bind mounts info
+					- Stats&Logs📝
+				</aside>
+			</section>
+			<section data-transition="slide" data-background="#9addbd" data-background-transition="zoom">
+				<h2>Checkpointing in Kubernetes</h2>
+				<p>Graduated to alpha in Kubernetes v1.25 (#2008)</p>
+				<img src="images/graduated_alpha.png" style="max-width:50%"></img>
+				<p>Currently only checkpointing, exposed at Kubelet level</p>
+			</section>
+			<section data-transition="slide" data-background="#9addbd" data-background-transition="zoom">
+				<h2>Checkpointing in Kubernetes</h2>
+				<h4>Requirements</h4>
+				<ul>
+					<li class="fragment">Container runtime: CRI-O</li>
+					<div class="fragment">
+						<li>Enable feature gate: ContainerCheckpoint</li>
+						<pre><code class="yaml">kube-apiserver.yaml: - --feature-gates=ContainerCheckpoint=true</code></pre>
+					</div>
+					<div class="fragment">
+						<li>Enable CRI-O in the config</li>
+						<pre><code class="yaml">enable_criu_support = true</code></pre>
+					</div>
+				</ul>
+			</section>
+			<section data-transition="slide" data-background="#00008b" data-background-transition="zoom">
+				<h2>Live Demo: checkpointctl</h2>
+				<!-- quick demo just showing stats -->
+			</section>
+			<section data-transition="slide" data-background="#00008b" data-background-transition="zoom">
+				<h2>CRIU limitations</h2>
+				<p>Not everything can be checkpointed:</p>
+				<ul>
+					<li class="fragment">Devices</li>
+					<li class="fragment">Open files from unmounted fs</li>
+					<li class="fragment">Traced processes</li>
+				</ul>
+			</section>
+			<section data-transition="slide" data-background="#cccccc" data-background-transition="zoom">
+				<h2>Checkpointing in Kubernetes: restoring a checkpoint</h2>
+				<ul>
+					<li class="fragment">Outside of k8s</li>
+					<li class="fragment">Inside of k8s: necessary to build an image from the checkpoint</li>
+				</ul>
+			</section>
+			<section data-transition="slide" data-background="#00008b" data-background-transition="zoom">
+				<h2>Full demo</h2>
+			</section>
 		</div>
+	</div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
 </html>

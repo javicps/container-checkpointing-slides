@@ -27,6 +27,10 @@
 				<p>
 					<small><a href="">Daniel Simionato</a> and <a href="">Javier Martínez</a></small>
 				</p>
+				<aside class="notes">
+					Welcome everyone to our talk today. We will spend the next minutes exploring a very promising field in cloud computing
+					called Digital Forensics. Along with it, we will present one of the latest advancements in Kubernetes, Container Checkpointing, and its potential to revolutionize this field.
+				</aside>
 			</section>
 			<section>
 				<h3>About us</p>
@@ -38,6 +42,10 @@
 					<img src="images/profile_javi.jpeg" style="width: 200px;"></img>
 				</div>
 				</p>
+				<aside class="notes">
+					First, a little bit about us. I'm Daniel Simionato and I work as Technical Marketing Manager for Sysdig. 
+					And I'm Javier Martinez and I work as Tech Lead for the Spanish company Fútbol Emotion.
+				</aside>
 			</section>
 			<section data-background="#399ba3">
 				<h2>What is Digital Forensics?</p>
@@ -51,6 +59,26 @@
 				<p class="fragment"><strong>electronic data</strong> as evidence of a criminal activity</p>
 			</section>
 			<section data-background="#399ba3">
+				<h2>Criminal activity</p>
+				</h2>
+				<ul>
+					<li class="fragment">Cryptojacking</li>
+					<li class="fragment">Malware</li>
+					<div class="fragment">
+					<li>Ransomware</li>
+					<li>...</li>
+				</div>
+				</ul>
+				<img src="images/attack.jpg" style="float:right; max-width:50%"></img>
+			</section>
+			<section data-background="#399ba3">
+				<h2>DFIR</p>
+				</h2>
+				<p>Digital Forensics</p>
+				<p>+</p> 
+				<p>Incident Response</p>
+			</section>
+			<section data-background="#399ba3">
 				<h2>Two important moments:</p>
 				</h2>
 				<ul>
@@ -61,9 +89,11 @@
 			<section data-background="#746AB0">
 				<h2>Container Checkpointing</p>
 				</h2>
-				<p class="fragment">Save the current container state</p>
-				<p class="fragment">Snapshot</p>
-				<p class="fragment">Backup</p>
+				<ul>
+				<li class="fragment">Save the current container state</p>
+				<li class="fragment">Snapshot</p>
+				<li class="fragment">Backup</p>
+			</ul>
 			</section>
 			<section data-background="#746AB0">
 				<h2>A note about state</p>
@@ -107,24 +137,24 @@
 					- Stats&Logs📝
 				</aside>
 			</section>
-			<section data-transition="slide" data-background="#9addbd" data-background-transition="zoom">
+			<section data-transition="slide" data-background="#9addbd">
 				<h2>Checkpointing in Kubernetes</h2>
 				<p>Graduated to alpha in Kubernetes v1.25 (#2008)</p>
 				<img src="images/graduated_alpha.png" style="max-width:50%"></img>
 				<p>Currently only checkpointing, exposed at Kubelet level</p>
 			</section>
-			<section data-transition="slide" data-background="#9addbd" data-background-transition="zoom">
+			<section data-transition="slide" data-background="#9addbd">
 				<h2>Checkpointing in Kubernetes</h2>
 				<h4>Requirements</h4>
 				<ul>
 					<li class="fragment">Container runtime: CRI-O</li>
 					<div class="fragment">
 						<li>Enable feature gate: ContainerCheckpoint</li>
-						<pre><code class="yaml">kube-apiserver.yaml: - --feature-gates=ContainerCheckpoint=true</code></pre>
+						<pre><code class="yaml" style="font-size: 0.75em;">kube-apiserver.yaml: - --feature-gates=ContainerCheckpoint=true</code></pre>
 					</div>
 					<div class="fragment">
 						<li>Enable CRI-O in the config</li>
-						<pre><code class="yaml">enable_criu_support = true</code></pre>
+						<pre><code class="yaml" style="font-size: 0.75em;">enable_criu_support = true</code></pre>
 					</div>
 				</ul>
 			</section>
@@ -150,6 +180,10 @@
 			</section>
 			<section data-transition="slide" data-background="#00008b" data-background-transition="zoom">
 				<h2>Full demo</h2>
+			</section>
+			<section data-transition="slide" data-background="#cccccc" data-background-transition="zoom">
+				<h2>Questions</h2>
+				<h1 class="r-fit-text">?</h1>
 			</section>
 		</div>
 	</div>

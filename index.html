@@ -106,6 +106,7 @@
 			<section data-background="#746AB0">
 				<h2>A note about state</p>
 				</h2>
+				<p class="fragment">Stateful vs Stateless</p>
 				<p class="fragment">Save the current container state</p>
 			</section>
 			<section data-background="#746AB0">
@@ -114,16 +115,16 @@
 				<img src="images/criu.svg" style="float:right; max-width:30%"></img>
 				<ul>
 					<li class="fragment">Initial POC on 2011</li>
-					<li class="fragment">Started as Virtuozzo project</li>
+					<li class="fragment">Started from Virtuozzo</li>
 					<li class="fragment">1.0 in Nov. 2013 (Linux 3.11)</li>
 					<li class="fragment">Checkpoint/Restore In Userspace</li>
 					<li class="fragment">Multiple use cases</li>
 				</ul>
 				<aside class="notes">
-					It all started on 2011, as Virtuozzo project
+					It all started on 2011, where the team at Virtuozzo created a linux software to create snapshots
 					Version 1.0 was deployed at November 2013th
-					Checkpoint/Restore In Userspace
-					Multiple use cases: container migration, live kernel patching, apps snapshot/zero downtime crash
+					The name CRIU stands for Checkpoint/Restore In Userspace, meaning that this is where the snapshot is created, rather than in kernel.
+					Multiple use cases: container migration, live patching, apps snapshot/zero downtime crash
 					restore, ...
 				</aside>
 			</section>
@@ -150,7 +151,12 @@
 				<p>Graduated to alpha in Kubernetes v1.25 (#2008)</p>
 				<img src="images/graduated_alpha.png" style="max-width:50%"></img>
 				<p>Currently only checkpointing, exposed at Kubelet level</p>
-				<p>/checkpoint API call</p>
+				<p>/checkpoint CAPI call</p>
+				<aside class="notes">
+					Luckily, Kubernetes implements checkpointing since v1.25, where this feature was integrated as alpha.
+					Note however, that there's current native support only for checkpointing, not restoring which is the counterpart.
+					Once again with the analogy, we have support to save game, but not yet to load the game.
+				</aside>
 			</section>
 			<section data-transition="slide" data-background="#9addbd">
 				<h2>Checkpointing in Kubernetes</h2>
@@ -181,7 +187,15 @@
 				</ul>
 			</section>
 			<section data-transition="slide" data-background="#cccccc" data-background-transition="zoom">
-				<h2>Checkpointing in Kubernetes: restoring a checkpoint</h2>
+				<h2>Checkpointing in Kubernetes</h2>
+				<ul>
+					<li class="fragment">The copy is created without the container knowing</li>
+					<li class="fragment">No processes are stopped</li>
+					
+				</ul>
+			</section>
+			<section data-transition="slide" data-background="#cccccc" data-background-transition="zoom">
+				<h2>What happens when we checkpoint?</h2>
 				<ul>
 					<li class="fragment">Outside of k8s</li>
 					<li class="fragment">Inside of k8s: necessary to build an image from the checkpoint</li>
@@ -193,9 +207,28 @@
 			<section data-transition="slide" data-background="#00008b" data-background-transition="zoom">
 				<h2>Other usages</h2>
 				<ul>
-					<li class="fragment">Recovery from failure</li>
-					<li class="fragment">Container migration</li>
+					<li>Backups</li>
+					<li>Recovery from failure</li>
+					<li>Container migration</li>
 				</ul>
+				<aside class="notes">
+					Note that apart from the forensic investigation case, checkpointing can be used in many different ways,
+					like backing up critical containers, recover from a failure into a desired state or migrate container state to a new cluster.
+					Take into account, however, that the original goal for the feature was for forensic usage.
+				</aside>
+			</section>
+			<section data-transition="slide" data-background="#00008b" data-background-transition="zoom">
+				<h2>Limitations</h2>
+				<ul>
+					<li class="fragment">CRI-O has to be enabled</li>
+					<li class="fragment">v1.25</li>
+					<li class="fragment">Containerd</li>
+				</ul>
+				<aside class="notes">
+					Also, bear in mind that checkpointing in kubernetes has several constraints that needs to be granted: first, you need your cluster
+					to supper the CRI-o container runtime. For example. EKS in AWS currently doesn't support it. Other runtimes like containerd are currently not
+					supporting it, but there's an open PR that might qualify at some point.  
+				</aside>
 			</section>
 			<section data-transition="slide" data-background="#cccccc" data-background-transition="zoom">
 				<h2>Questions</h2>

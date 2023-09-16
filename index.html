@@ -168,10 +168,13 @@
 						<pre><code class="yaml" style="font-size: 0.75em;">kube-apiserver.yaml: - --feature-gates=ContainerCheckpoint=true</code></pre>
 					</div>
 					<div class="fragment">
-						<li>Enable CRI-O in the config</li>
+						<li>Enable CRIU support in the config</li>
 						<pre><code class="yaml" style="font-size: 0.75em;">enable_criu_support = true</code></pre>
 					</div>
 				</ul>
+				<aside class="notes">
+					In order to start checkpointing your containers, you will need to enable CRI-O in the config, if 
+				</aside>
 			</section>
 			<section data-transition="slide" data-background="#00008b" data-background-transition="zoom">
 				<h2>Live Demo: checkpointctl</h2>

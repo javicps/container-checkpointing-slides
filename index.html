@@ -156,9 +156,6 @@
 				</aside>
 			</section>
 
-			<section data-background="#00008b" data-background-transition="zoom">
-				<h2>Demo: checkpointing with Podman</h2>
-			</section>
 			<section data-background="#746AB0">
 				<h2>Container checkpoint demo</h2>
 				<div id="player-podman"></div>
@@ -175,7 +172,7 @@
 				<p>Graduated to alpha in Kubernetes v1.25 (#2008)</p>
 				<img src="images/graduated_alpha.png" style="max-width:50%"></img>
 				<p>Currently only checkpointing, exposed at Kubelet level</p>
-				<p>/checkpoint CAPI call</p>
+				<p>/checkpoint API call</p>
 				<aside class="notes">
 					Luckily, Kubernetes implements checkpointing since v1.25, where this feature was integrated as alpha.
 					Note however, that there's current native support only for checkpointing, not restoring which is the counterpart.
@@ -231,7 +228,7 @@
                                     AsciinemaPlayer.create(
                                       'asciinema/checkpointctl.cast',
                                       document.getElementById('player-checkpointctl'),
-                                      { cols: 110, rows: 25 }
+                                      { cols: 130, rows: 30 }
                                     );
                                   </script>
 			</section>
@@ -242,7 +239,7 @@
                                     AsciinemaPlayer.create(
                                       'asciinema/crit.cast',
                                       document.getElementById('player-crit'),
-                                      { cols: 110, rows: 25 }
+                                      { cols: 130, rows: 30 }
                                     );
                                   </script>
 			</section>
@@ -276,7 +273,7 @@
 				<h2>Kubernetes checkpointing Limitations</h2>
 				<ul>
 					<li class="fragment">CRI-O has to be enabled</li>
-					<li class="fragment">v3.16</li>
+					<li class="fragment">Needs criu v3.16+</li>
 					<li class="fragment">Containerd</li>
 				</ul>
 				<aside class="notes">

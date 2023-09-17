@@ -213,19 +213,40 @@
 				</aside>
 			</section>
 
-			<section data-transition="slide" data-background="#00008b" data-background-transition="zoom">
-				<h2>Live Demo: Kubernetes Checkpoint</h2>
-				<!-- quick demo just showing stats -->
+			<section data-background="#9addbd" data-background-transition="zoom">
+				<h2>Kubernetes checkpoint demo</h2>
+				<div id="player-k8s"></div>
+				  <script>
+                                    AsciinemaPlayer.create(
+                                      'asciinema/k8s-checkpoint.cast',
+                                      document.getElementById('player-k8s'),
+                                      { cols: 110, rows: 25 }
+                                    );
+                                  </script>
 			</section>
-			<section data-transition="slide" data-background="#9addbd">
-				<h2>CRIU limitations</h2>
-				<p>Not everything can be checkpointed:</p>
-				<ul>
-					<li class="fragment">Devices</li>
-					<li class="fragment">Open files from unmounted fs</li>
-					<li class="fragment">Traced processes</li>
-				</ul>
+			<section data-background="#9addbd" data-background-transition="zoom">
+				<h2>checkpointctl demo</h2>
+				<div id="player-checkpointctl"></div>
+				  <script>
+                                    AsciinemaPlayer.create(
+                                      'asciinema/checkpointctl.cast',
+                                      document.getElementById('player-checkpointctl'),
+                                      { cols: 110, rows: 25 }
+                                    );
+                                  </script>
 			</section>
+			<section data-background="#9addbd" data-background-transition="zoom">
+				<h2>checkpoint analysis & crit demo</h2>
+				<div id="player-crit"></div>
+				  <script>
+                                    AsciinemaPlayer.create(
+                                      'asciinema/crit.cast',
+                                      document.getElementById('player-crit'),
+                                      { cols: 110, rows: 25 }
+                                    );
+                                  </script>
+			</section>
+
 			<section data-background="#9addbd" >
 				<h2>Checkpointing in Kubernetes</h2>
 				<ul>
@@ -241,6 +262,29 @@
 					<li class="fragment">Inside of k8s: build an image from the checkpoint</li>
 				</ul>
 			</section>
+
+			<section data-transition="slide" data-background="#9addbd">
+				<h2>CRIU limitations</h2>
+				<p>Not everything can be checkpointed:</p>
+				<ul>
+					<li class="fragment">Devices</li>
+					<li class="fragment">Open files from unmounted fs</li>
+					<li class="fragment">Traced processes</li>
+				</ul>
+			</section>
+			<section data-transition="slide" data-background="#9addbd" >
+				<h2>Kubernetes checkpointing Limitations</h2>
+				<ul>
+					<li class="fragment">CRI-O has to be enabled</li>
+					<li class="fragment">v3.16</li>
+					<li class="fragment">Containerd</li>
+				</ul>
+				<aside class="notes">
+					Also, bear in mind that checkpointing in kubernetes has several constraints that needs to be granted: first, you need your cluster
+					to supper the CRI-o container runtime. For example. EKS in AWS currently doesn't support it. Other runtimes like containerd are currently not
+					supporting it, but there's an open PR that might qualify at some point.  
+				</aside>
+			</section>
 			<section data-background="#9addbd" >
 				<h2>Other usages</h2>
 				<ul>
@@ -252,19 +296,6 @@
 					Note that apart from the forensic investigation case, checkpointing can be used in many different ways,
 					like backing up critical containers, recover from a failure into a desired state or migrate container state to a new cluster.
 					Take into account, however, that the original goal for the feature was for forensic usage.
-				</aside>
-			</section>
-			<section data-transition="slide" data-background="#9addbd" >
-				<h2>Limitations</h2>
-				<ul>
-					<li class="fragment">CRI-O has to be enabled</li>
-					<li class="fragment">v3.16</li>
-					<li class="fragment">Containerd</li>
-				</ul>
-				<aside class="notes">
-					Also, bear in mind that checkpointing in kubernetes has several constraints that needs to be granted: first, you need your cluster
-					to supper the CRI-o container runtime. For example. EKS in AWS currently doesn't support it. Other runtimes like containerd are currently not
-					supporting it, but there's an open PR that might qualify at some point.  
 				</aside>
 			</section>
 			<section data-transition="slide" data-background="#cccccc" data-background-transition="zoom">

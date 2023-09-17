@@ -30,8 +30,10 @@
 					<small><a href="">Daniel Simionato</a> and <a href="">Javier Martínez</a></small>
 				</p>
 				<aside class="notes">
-					Welcome everyone to our talk today. We will spend the next minutes exploring a very promising field in cloud computing
-					called Digital Forensics. Along with it, we will present one of the latest advancements in Kubernetes, Container Checkpointing, and its potential to revolutionize this field.
+					Welcome everyone to our talk today. We will spend the next minutes exploring a very promising field
+					in cloud computing
+					called Digital Forensics. Along with it, we will present one of the latest advancements in
+					Kubernetes, Container Checkpointing, and its potential to revolutionize this field.
 				</aside>
 			</section>
 			<section>
@@ -45,7 +47,8 @@
 				</div>
 				</p>
 				<aside class="notes">
-					First, a little bit about us. I'm Daniel Simionato and I work as Technical Marketing Manager for Sysdig. 
+					First, a little bit about us. I'm Daniel Simionato and I work as Technical Marketing Manager for
+					Sysdig.
 					And I'm Javier Martinez and I work as Tech Lead for the Spanish company Fútbol Emotion.
 				</aside>
 			</section>
@@ -60,21 +63,24 @@
 				</ul>
 				<p class="fragment"><strong>electronic data</strong> as evidence of a criminal activity</p>
 				<aside class="notes">
-					Digital forensics is an area of computer forensics that is focused on retrieving, analizing and preserving electronic data to determine
-					if a cyber attack ocurred and who is the attacker, but what's more important, to collect evidence of any possible criminal activity.
+					Digital forensics is an area of computer forensics that is focused on retrieving, analizing and
+					preserving electronic data to determine
+					if a cyber attack ocurred and who is the attacker, but what's more important, to collect evidence of
+					any possible criminal activity.
 				</aside>
 			</section>
 			<section data-background="#399ba3">
 				<h2>DFIR</p>
 				</h2>
 				<p>Digital Forensics</p>
-				<p>+</p> 
+				<p>+</p>
 				<p>Incident Response</p>
 				<aside class="notes">
-					You might have heard as well the term DFIR, which is a wider area comprising both digital forensics and incident response. The part
+					You might have heard as well the term DFIR, which is a wider area comprising both digital forensics
+					and incident response. The part
 					related with Incident response focuses on how to recover quickly from security incidents.
 				</aside>
-			</section>			
+			</section>
 			<section data-background="#399ba3">
 				<h2>Criminal activity</p>
 				</h2>
@@ -82,20 +88,22 @@
 					<li class="fragment">Cryptojacking</li>
 					<li class="fragment">Malware</li>
 					<div class="fragment">
-					<li>Ransomware</li>
-					<li>...</li>
-				</div>
+						<li>Ransomware</li>
+						<li>...</li>
+					</div>
 				</ul>
 				<img src="images/attack.jpg" style="float:right; max-width:50%"></img>
 				<aside class="notes">
-					While you may think that digital forensics is needed only in security companies, right now most companies run applications in the cloud,
-					while exposing important information outside. 
+					While you may think that digital forensics is needed only in security companies, right now most
+					companies run applications in the cloud,
+					while exposing important information outside.
 				</aside>
 			</section>
-			<section >
-				<img style="max-width: 90%;" src="images/crime-scene.jpeg"/>
+			<section>
+				<img style="max-width: 90%;" src="images/crime-scene.jpeg" />
 				<aside class="notes">
-					If you have seen any crime TV series or movie, you may have heard of the phrase: Do not touch any part of the crime scene,
+					If you have seen any crime TV series or movie, you may have heard of the phrase: Do not touch any
+					part of the crime scene,
 					as it may be collected as evidence
 				</aside>
 			</section>
@@ -103,38 +111,29 @@
 				<h2>Container Checkpointing</p>
 				</h2>
 				<ul>
-				<li class="fragment">Save the current container state</p>
-				<li class="fragment">Snapshot</p>
-				<li class="fragment">Backup</p>
-			</ul>
-			<img src="images/save.png" style="width: 50%"/>
-			<aside class="notes">
-				So, this is where container checkpointing comes in. Think of a checkpoint as a snapshot at a given time of the container state. Similar to a videogame save
-			</aside>
-			</section>
-			<section data-background="#746AB0">
-				<h2>How checkpointing is useful for DFIR?</h2>
-				<p ><strong>Investigate</strong> a container</p>
-				<p class="fragment">and retrieve <strong>criminal evidence</strong></p>
-				<p class="fragment">while the attacker is <strong>unaware</strong></p>
+					<li class="fragment">Save the current container state</p>
+					<li class="fragment">Snapshot</p>
+					<li class="fragment">Backup</p>
+				</ul>
+				<img src="images/save.png" style="width: 50%" />
 				<aside class="notes">
-					And more importantly, how container checkpointing can help us in digital forensics. It allows us to investigate a container in order to retrieve criminal evidence.
-					Since 
+					So, this is where container checkpointing comes in. Think of a checkpoint as a snapshot at a given
+					time of the container state. Similar to a videogame save
 				</aside>
 			</section>
 			<section data-background="#746AB0">
-				<img src="images/attack-diagram.png"/>
+				<h2>How checkpointing is useful for DFIR?</h2>
+				<p><strong>Investigate</strong> a container</p>
+				<p class="fragment">and retrieve <strong>criminal evidence</strong></p>
+				<p class="fragment">while the attacker is <strong>unaware</strong></p>
+				<aside class="notes">
+					And more importantly, how container checkpointing can help us in digital forensics. It allows us to
+					investigate a container in order to retrieve criminal evidence.
+					Since
+				</aside>
 			</section>
 			<section data-background="#746AB0">
-				<h2>Checkpoint contents</p>
-				</h2>
-				<ul>
-					<li class="fragment">Archive of all changed files (rootfs-diffs.tar)</li>
-					<li class="fragment">Images (of processes, memory, file descriptors...)</li>
-					<li class="fragment">Metadata</li>
-					<li class="fragment">Bind mounts info</li>
-					<li class="fragment">Stats&logs</li>
-				</ul>
+				<img src="images/attack-diagram.png" />
 			</section>
 			<section data-background="#746AB0">
 				<h2>It all started with CRIU</p>
@@ -150,7 +149,8 @@
 				<aside class="notes">
 					It all started on 2011, where the team at Virtuozzo created a linux software to create snapshots
 					Version 1.0 was deployed at November 2013th
-					The name CRIU stands for Checkpoint/Restore In Userspace, meaning that this is where the snapshot is created, rather than in kernel.
+					The name CRIU stands for Checkpoint/Restore In Userspace, meaning that this is where the snapshot is
+					created, rather than in kernel.
 					Multiple use cases: container migration, live patching, apps snapshot/zero downtime crash
 					restore, ...
 				</aside>
@@ -159,29 +159,34 @@
 			<section data-background="#746AB0">
 				<h2>Container checkpoint demo</h2>
 				<div id="player-podman"></div>
-				  <script>
-                                    AsciinemaPlayer.create(
-                                      'asciinema/podman-checkpoint.cast',
-                                      document.getElementById('player-podman'),
-                                      { cols: 110, rows: 25 }
-                                    );
-                                  </script>
+				<script>
+					AsciinemaPlayer.create(
+						'asciinema/podman-checkpoint.cast',
+						document.getElementById('player-podman'),
+						{ cols: 110, rows: 25 }
+					);
+				</script>
 			</section>
 			<section data-transition="slide" data-background="#9addbd">
 				<h2>Checkpointing in Kubernetes</h2>
 				<p>Graduated to alpha in Kubernetes v1.25 (#2008)</p>
 				<img src="images/graduated_alpha.png" style="max-width:50%"></img>
-				<p>Currently only checkpointing, exposed at Kubelet level</p>
-				<p>/checkpoint API call</p>
 				<aside class="notes">
-					Luckily, Kubernetes implements checkpointing since v1.25, where this feature was integrated as alpha.
-					Note however, that there's current native support only for checkpointing, not restoring which is the counterpart.
+					Luckily, Kubernetes implements checkpointing since v1.25, where this feature was integrated as
+					alpha.
+					Note however, that there's current native support only for checkpointing, not restoring which is the
+					counterpart.
 					Once again with the analogy, we have support to save game, but not yet to load the game.
 				</aside>
 			</section>
 			<section data-transition="slide" data-background="#9addbd">
 				<h2>Checkpointing in Kubernetes</h2>
-				<h4>Requirements</h4>
+				<p>Currently only checkpointing, exposed at Kubelet level</p>
+				<p>/checkpoint API call</p>
+			</section>
+			<section data-transition="slide" data-background="#9addbd">
+				<h2>Checkpointing in Kubernetes</h2>
+				<h4>Requirements: enable CRI-O and CRIU</h4>
 				<ul>
 					<li class="fragment">Container runtime: CRI-O</li>
 					<div class="fragment">
@@ -194,13 +199,20 @@
 					</div>
 				</ul>
 				<aside class="notes">
-					In order to start checkpointing your containers, you will need to enable CRI-O in the config, if 
+					In order to start checkpointing your containers, you will need to enable CRI-O in the config by adding the feature gate.
+					CRI-O is the container runtime, do not mistake it with Criu, which is the container/restore in userspace.
 				</aside>
 			</section>
 			<section data-background="#746AB0">
 				<h2>Kubernetes checkpoint output</h2>
 				<p class="fragment">A tar file, containing</p>
-
+				<ul>
+					<li class="fragment">Archive of all changed files (rootfs-diffs.tar)</li>
+					<li class="fragment">Images (of processes, memory, file descriptors...)</li>
+					<li class="fragment">Metadata</li>
+					<li class="fragment">Bind mounts info</li>
+					<li class="fragment">Stats&logs</li>
+				</ul>
 				<aside class="notes">
 					- An archive of all changed files on the container filesystem (rootfs-diffs.tar)
 					- Checkpoint images of processes, memory, file descriptors, etc.
@@ -213,51 +225,60 @@
 			<section data-background="#9addbd" data-background-transition="zoom">
 				<h2>Kubernetes checkpoint demo</h2>
 				<div id="player-k8s"></div>
-				  <script>
-                                    AsciinemaPlayer.create(
-                                      'asciinema/k8s-checkpoint.cast',
-                                      document.getElementById('player-k8s'),
-                                      { cols: 110, rows: 25 }
-                                    );
-                                  </script>
+				<script>
+					AsciinemaPlayer.create(
+						'asciinema/k8s-checkpoint.cast',
+						document.getElementById('player-k8s'),
+						{ cols: 110, rows: 25 }
+					);
+				</script>
 			</section>
 			<section data-background="#9addbd" data-background-transition="zoom">
 				<h2>checkpointctl demo</h2>
 				<div id="player-checkpointctl"></div>
-				  <script>
-                                    AsciinemaPlayer.create(
-                                      'asciinema/checkpointctl.cast',
-                                      document.getElementById('player-checkpointctl'),
-                                      { cols: 130, rows: 30 }
-                                    );
-                                  </script>
+				<script>
+					AsciinemaPlayer.create(
+						'asciinema/checkpointctl.cast',
+						document.getElementById('player-checkpointctl'),
+						{ cols: 130, rows: 30 }
+					);
+				</script>
 			</section>
 			<section data-background="#9addbd" data-background-transition="zoom">
 				<h2>checkpoint analysis & crit demo</h2>
 				<div id="player-crit"></div>
-				  <script>
-                                    AsciinemaPlayer.create(
-                                      'asciinema/crit.cast',
-                                      document.getElementById('player-crit'),
-                                      { cols: 130, rows: 30 }
-                                    );
-                                  </script>
+				<script>
+					AsciinemaPlayer.create(
+						'asciinema/crit.cast',
+						document.getElementById('player-crit'),
+						{ cols: 130, rows: 30 }
+					);
+				</script>
 			</section>
 
-			<section data-background="#9addbd" >
+			<section data-background="#9addbd">
 				<h2>Checkpointing in Kubernetes</h2>
 				<ul>
 					<li class="fragment">The copy is created without the container knowing</li>
 					<li class="fragment">No processes are stopped</li>
-					
 				</ul>
+				<aside class="notes">
+					The checkpointing feature has additional features interesting for digital forensics:
+					The first one is that the checkpoint is created without the container knowing, and the tar file is only accessible for root users.
+					At the same time, no processes are stopped, so an attacker is unaware of it.
+				</aside>
 			</section>
-			<section data-background="#9addbd" >
+			<section data-background="#9addbd">
 				<h2>Restoring</h2>
 				<ul>
 					<li class="fragment">Outside of k8s: Podman</li>
 					<li class="fragment">Inside of k8s: build an image from the checkpoint</li>
 				</ul>
+				<aside class="notes">
+					The checkpointing feature has additional features interesting for digital forensics:
+					The first one is that the checkpoint is created without the container knowing, and the tar file is only accessible for root users.
+					At the same time, no processes are stopped, so an attacker is unaware of it.
+				</aside>
 			</section>
 
 			<section data-transition="slide" data-background="#9addbd">
@@ -269,7 +290,7 @@
 					<li class="fragment">Traced processes</li>
 				</ul>
 			</section>
-			<section data-transition="slide" data-background="#9addbd" >
+			<section data-transition="slide" data-background="#9addbd">
 				<h2>Kubernetes checkpointing Limitations</h2>
 				<ul>
 					<li class="fragment">CRI-O has to be enabled</li>
@@ -277,12 +298,15 @@
 					<li class="fragment">Containerd</li>
 				</ul>
 				<aside class="notes">
-					Also, bear in mind that checkpointing in kubernetes has several constraints that needs to be granted: first, you need your cluster
-					to supper the CRI-o container runtime. For example. EKS in AWS currently doesn't support it. Other runtimes like containerd are currently not
-					supporting it, but there's an open PR that might qualify at some point.  
+					Also, bear in mind that checkpointing in kubernetes has several constraints that needs to be
+					granted: first, you need your cluster
+					to supper the CRI-o container runtime. For example. EKS in AWS currently doesn't support it. Also,
+					you need at least CRIU version 3.16 or higher.
+					Other runtimes like containerd are currently not supporting it, but there's an open PR that might
+					qualify at some point.
 				</aside>
 			</section>
-			<section data-background="#9addbd" >
+			<section data-background="#9addbd">
 				<h2>Other usages</h2>
 				<ul>
 					<li>Backups</li>
@@ -290,9 +314,9 @@
 					<li>Container migration</li>
 				</ul>
 				<aside class="notes">
-					Note that apart from the forensic investigation case, checkpointing can be used in many different ways,
-					like backing up critical containers, recover from a failure into a desired state or migrate container state to a new cluster.
-					Take into account, however, that the original goal for the feature was for forensic usage.
+					Note that apart from the forensic investigation case, checkpointing can be used in many different
+					ways, like backing up critical containers, recover from a failure into a desired state or migrate
+					container state to a new cluster.
 				</aside>
 			</section>
 			<section data-transition="slide" data-background="#cccccc" data-background-transition="zoom">

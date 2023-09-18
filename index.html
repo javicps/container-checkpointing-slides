@@ -181,9 +181,17 @@
 			</section>
 			<section data-transition="slide" data-background="#9addbd">
 				<h2>Checkpointing in Kubernetes</h2>
-				<p>Currently only checkpointing, exposed at Kubelet level</p>
-				<p>/checkpoint API call</p>
+				<p>Currently only checkpointing</p>
+				<p>Restore still not available</p>
 			</section>
+			<section data-transition="slide" data-background="#9addbd" style="text-align: left;">
+				<h2>Checkpoint procedure</h2>
+				<p>We call Kubernetes API:</p>
+				<pre><code class="yaml">POST /checkpoint/{namespace}/{pod}/{container}</code></pre>
+				<p>Kubelet will request a checkpoint</p>
+				<p>A .tar file is created under:</p>
+				<pre><code class="yaml">/var/lib/kubelet/checkpoints</code></pre>
+			</section>			
 			<section data-transition="slide" data-background="#9addbd">
 				<h2>Checkpointing in Kubernetes</h2>
 				<h4>Requirements: enable CRI-O and CRIU</h4>
@@ -203,7 +211,7 @@
 					CRI-O is the container runtime, do not mistake it with Criu, which is the container/restore in userspace.
 				</aside>
 			</section>
-			<section data-background="#746AB0">
+			<section data-background="#9addbd">
 				<h2>Kubernetes checkpoint output</h2>
 				<p class="fragment">A tar file, containing</p>
 				<ul>
@@ -214,6 +222,8 @@
 					<li class="fragment">Stats&logs</li>
 				</ul>
 				<aside class="notes">
+					Once checkpointing is complete, we will have a .tar file created. The contents of the tar file will 
+					depend on the container runtime being used, but will likely have:
 					- An archive of all changed files on the container filesystem (rootfs-diffs.tar)
 					- Checkpoint images of processes, memory, file descriptors, etc.
 					- Metadata about the container
@@ -271,6 +281,7 @@
 			<section data-background="#9addbd">
 				<h2>Restoring</h2>
 				<ul>
+					<li class="fragment">Load container state in a sandbox</li>
 					<li class="fragment">Outside of k8s: Podman</li>
 					<li class="fragment">Inside of k8s: build an image from the checkpoint</li>
 				</ul>
@@ -319,9 +330,25 @@
 					container state to a new cluster.
 				</aside>
 			</section>
+			<section data-background="#9addbd">
+				<h2>Summary</h2>
+				<ul>
+					<li>Checkpoint can be crucial in DFIR</li>
+					<li>Snapshot of a container state</li>
+					<li>Checkpointing available in K8s</li>
+					<li>Beware of requirements</li>
+				</ul>
+				<aside class="notes">
+					Wrapping up, we can say, first: checkpointing is a crucial for digital forensics as it allows us to take picture of a running 
+					container that can be used to investigate, and also as evidence of criminal activity. This checkpoint is a snapshot of the 
+					container state, which can give us lots of information. This feature is available in k8s as of v1.25. And beware of requirements.
+					you need to have CRIO as container runtime. CRIU enabled and with version 3.16, etc.
+				</aside>
+			</section>
 			<section data-transition="slide" data-background="#cccccc" data-background-transition="zoom">
+				<h1>Thank you!</h1>
 				<h2>Questions</h2>
-				<h1 class="r-fit-text">?</h1>
+				<h2>?</h2>
 			</section>
 		</div>
 	</div>

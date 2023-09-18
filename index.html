@@ -191,6 +191,11 @@
 				<p>Kubelet will request a checkpoint</p>
 				<p>A .tar file is created under:</p>
 				<pre><code class="yaml">/var/lib/kubelet/checkpoints</code></pre>
+				<aside class="notes">
+					This is the whole flow of a container checkpoint. First, we call the endpoint at /checkpoint with our namespace,
+					pod and container. This will make the kubelet request a checkpoint to the container runtime. Finally, a .tar file will
+					be created under this folder. The file created will be accessible only for root
+				</aside>
 			</section>			
 			<section data-transition="slide" data-background="#9addbd">
 				<h2>Checkpointing in Kubernetes</h2>

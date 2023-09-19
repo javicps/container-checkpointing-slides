@@ -1,4 +1,4 @@
-{"version": 2, "width": 214, "height": 30, "timestamp": 1694872699, "idle_time_limit": 2.0, "env": {"SHELL": null, "TERM": "xterm"}}
+{"version": 2, "width": 214, "height": 30, "timestamp": 1694872699, "idle_time_limit": 20.0, "env": {"SHELL": null, "TERM": "xterm"}}
 [0.10457, "o", "sh-4.4# "]
 [2.425221, "o", "c"]
 [2.586403, "o", "d"]

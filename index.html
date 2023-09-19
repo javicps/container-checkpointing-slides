@@ -165,7 +165,7 @@
 					AsciinemaPlayer.create(
 						'asciinema/podman-checkpoint.cast',
 						document.getElementById('player-podman'),
-						{ cols: 110, rows: 25 }
+						{ cols: 110, rows: 25, idleTimeLimit: 20 }
 					);
 				</script>
 			</section>
@@ -209,8 +209,8 @@
 						<pre><code class="yaml" > --feature-gates=ContainerCheckpoint=True</code></pre>
 					</div>
 					<div class="fragment">
-						<li>Enable CRIU support in the config</li>
-						<pre><code class="yaml" >enable_criu_support = true</code></pre>
+						<li>Enable CRIU support in the cri-o config</li>
+						<pre><code class="yaml" >enable_criu_support=true</code></pre>
 					</div>
 				</ul>
 				<aside class="notes">
@@ -268,7 +268,7 @@
 					AsciinemaPlayer.create(
 						'asciinema/crit.cast',
 						document.getElementById('player-crit'),
-						{ cols: 130, rows: 30 }
+						{ cols: 110, rows: 25, idleTimeLimit: 20 }
 					);
 				</script>
 			</section>
@@ -276,8 +276,8 @@
 			<section data-background="#9addbd">
 				<h2>Checkpointing in Kubernetes</h2>
 				<ul>
-					<li class="fragment">The copy is created without the container knowing</li>
-					<li class="fragment">No processes are stopped</li>
+					<li class="fragment">The copy is created transparently from the container point of view</li>
+					<li class="fragment">No interference to running processes</li>
 				</ul>
 				<aside class="notes">
 					The checkpointing feature has additional features interesting for digital forensics:
@@ -289,8 +289,8 @@
 				<h2>Restoring</h2>
 				<ul>
 					<li class="fragment">Load container state in a sandbox</li>
-					<li class="fragment">Outside of k8s: Podman</li>
-					<li class="fragment">Inside of k8s: build an image from the checkpoint</li>
+					<li class="fragment">Outside of k8s: Podman, crictl</li>
+					<li class="fragment">Inside of k8s: build an image from the checkpoint with buildah</li>
 				</ul>
 				<aside class="notes">
 					The checkpointing feature has additional features interesting for digital forensics:
@@ -312,8 +312,9 @@
 				<h2>Kubernetes checkpointing Limitations</h2>
 				<ul>
 					<li class="fragment">CRI-O has to be enabled</li>
+					<li class="fragment">Kubelet level API (security concerns)</li>
 					<li class="fragment">Needs criu v3.16+</li>
-					<li class="fragment">Containerd</li>
+					<li class="fragment">Currently no containerd support</li>
 				</ul>
 				<aside class="notes">
 					Also, bear in mind that checkpointing in kubernetes has several constraints that needs to be
@@ -327,9 +328,11 @@
 			<section data-background="#9addbd">
 				<h2>Other usages</h2>
 				<ul>
+					<li>Container live migration</li>
 					<li>Backups</li>
 					<li>Recovery from failure</li>
-					<li>Container migration</li>
+					<li>Application hot-start</li>
+					<li>Application debugging</li>
 				</ul>
 				<aside class="notes">
 					Note that apart from the forensic investigation case, checkpointing can be used in many different
@@ -351,6 +354,20 @@
 					container state, which can give us lots of information. This feature is available in k8s as of v1.25. And beware of requirements.
 					you need to have CRIO as container runtime. CRIU enabled and with version 3.16, etc.
 				</aside>
+			</section>
+			<section data-transition="slide">
+				<h3>Sources & references</h3>
+				<ul>
+					<li><a href="https://kubernetes.io/blog/2022/12/05/forensic-container-checkpointing-alpha/">Kubernetes blog - Forensic Container Checkpointing</a></li>
+					<li><a href="https://kubernetes.io/blog/2023/03/10/forensic-container-analysis/">Kubernetes blog - Forensic Container Analysis</a></li>
+					<li><a href="https://github.com/kubernetes/enhancements/pull/1990">Container Checkpointing PR</a></li>
+					<li><a href="https://github.com/kubernetes/enhancements/tree/master/keps/sig-node/2008-forensic-container-checkpointing">KEP - Forensic Container Checkpointing</a></li>
+					<li><a href="https://kubernetes.io/docs/reference/node/kubelet-checkpoint-api/">Kubelet Checkpoint API</a></li>
+					<li><a href="https://github.com/checkpoint-restore/criu">criu</a></li>
+					<li><a href="https://github.com/checkpoint-restore/checkpointctl">checkpointctl</a></li>
+					<li><a href="https://www.youtube.com/watch?v=0RUDoTi-Lw4">KubeCon NA 2021: Kubernetes and Checkpoint Restore – Adrian Reber, Red Hat</a></li>
+					<li><a href="https://sysdig.com/blog/forensic-container-checkpointing-dfir-kubernetes/">Sysdig blog</a></li>
+				</ul>
 			</section>
 			<section data-transition="slide" data-background="#cccccc" data-background-transition="zoom">
 				<h1>Thank you!</h1>
